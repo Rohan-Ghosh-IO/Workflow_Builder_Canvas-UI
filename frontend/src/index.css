@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #dde9f7;
+  color: #1e293b;
+  cursor: default;
+}
+
+/* ── Canvas background ──────────────────────────────────── */
+.rf-canvas {
+  /* Solid sky-teal base — always visible for cursor, no white patches */
+  background-color: #dde9f7;
+}
+
+/* ── React Flow core ────────────────────────────────────── */
+/* Edges */
+.react-flow__edge-path {
+  stroke: #6366f1 !important;
+  stroke-width: 2px !important;
+}
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 8 4;
+  animation: rfEdgeFlow 1.2s linear infinite;
+}
+@keyframes rfEdgeFlow {
+  from { stroke-dashoffset: 24; }
+  to   { stroke-dashoffset: 0; }
+}
+.react-flow__edge:hover .react-flow__edge-path,
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #4f46e5 !important;
+  stroke-width: 2.5px !important;
+  filter: drop-shadow(0 0 5px rgba(99,102,241,0.45));
+}
+
+/* Connection line while dragging */
+.react-flow__connection-path {
+  stroke: #6366f1 !important;
+  stroke-width: 2px !important;
+  stroke-dasharray: 7 4;
+}
+
+/* Node selection ring */
+.react-flow__node.selected > div {
+  outline: 2px solid #6366f1 !important;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.12), 0 8px 24px rgba(0,0,0,0.10) !important;
+}
+
+/* ── Controls ────────────────────────────────────────────── */
+.react-flow__controls {
+  border-radius: 14px !important;
+  overflow: hidden;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.09), 0 1px 3px rgba(0,0,0,0.06) !important;
+  background: #ffffff !important;
+  bottom: 16px !important;
+  left: 16px !important;
+  display: flex;
+  flex-direction: column;
+}
+.react-flow__controls-button {
+  background: #ffffff !important;
+  border: none !important;
+  border-bottom: 1px solid #f8fafc !important;
+  color: #64748b !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background 0.15s, color 0.15s !important;
+  padding: 0 !important;
+}
+.react-flow__controls-button:last-child { border-bottom: none !important; }
+.react-flow__controls-button:hover { background: #f1f5f9 !important; color: #6366f1 !important; }
+.react-flow__controls-button svg { fill: currentColor !important; width: 14px !important; height: 14px !important; }
+
+/* ── MiniMap ─────────────────────────────────────────────── */
+.react-flow__minimap {
+  border-radius: 14px !important;
+  overflow: hidden;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.09) !important;
+  background: #ffffff !important;
+  bottom: 16px !important;
+  right: 16px !important;
+}
+
+/* ── Attribution ─────────────────────────────────────────── */
+.react-flow__attribution { display: none !important; }
+
+/* ── Handles ─────────────────────────────────────────────── */
+.react-flow__handle {
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+.react-flow__handle:hover {
+  transform: scale(1.35) !important;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.25) !important;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ── Focus visible ───────────────────────────────────────── */
+:focus-visible { outline: 2px solid #6366f1; outline-offset: 2px; }
+
+/* ── Drag ghost ──────────────────────────────────────────── */
+[draggable=true] { user-select: none; }
